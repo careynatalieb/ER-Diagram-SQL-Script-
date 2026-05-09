@@ -1,0 +1,186 @@
+CREATE TABLE Member (
+    MemberID INT PRIMARY KEY, 
+    FirstName VARCHAR(15) NOT NULL,
+    LastName VARCHAR(15) NOT NULL,
+    DateOfBirth DATE,
+    Address VARCHAR(30),
+    PhoneNumber VARCHAR(11),
+    DateJoined DATE
+);
+
+CREATE TABLE Volunteer (
+    VolunteerID INT PRIMARY KEY,
+    MemberID INT,
+    FirstName VARCHAR(15) NOT NULL,
+    LastName VARCHAR(15) NOT NULL,
+    Availability VARCHAR(100),
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
+);
+
+CREATE TABLE Event ( 
+    EventID INT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Date DATE,
+    Time TIME,
+    Location VARCHAR(100),
+    Description VARCHAR(200),
+    VolunteerID INT,
+    FOREIGN KEY (VolunteerID) REFERENCES Volunteer(VolunteerID)
+);
+
+CREATE TABLE Donations (
+    DonationID INT PRIMARY KEY,
+    MemberID INT NOT NULL,
+    Date DATE,
+    Type VARCHAR(50),
+    Amount DECIMAL(10,2),
+    FOREIGN KEY (MemberID) REFERENCES Member(MemberID)
+);
+
+    INSERT INTO Member VALUES 
+(1,'KALLIE','SNIPES','1999-06-26','101 MAIN STREET, COLUMBIA','123-4567','2020-01-01');
+INSERT INTO Member VALUES 
+(2,'ROBERT','CAREY','1999-01-04','102 MAIN STREET, COLUMBIA','321-5432','2023-01-02');
+INSERT INTO Member VALUES 
+(3,'ASHLEY','MERIDA','2001-12-05','103 MAIN STREET, COLUMBIA','124-5674','2025-03-03');
+INSERT INTO Member VALUES 
+(4,'NATALIE','CAREY','1999-03-04','102 MAIN STREET, COLUMBIA','578-3421','2023-01-02');
+INSERT INTO Member VALUES 
+(5,'KYLIE','STACEY','1998-02-12','122 WEST ELM STREET, COLUMBIA','333-4444','2020-01-01');
+INSERT INTO Member VALUES 
+(6,'CLAYTON','STACEY','1997-03-12','122 WEST ELM STREET, COLUMBIA','444-3333','2020-01-01');
+INSERT INTO Member VALUES 
+(7,'MIKAYLA','MOORE','1998-07-24','12 LIBERTY STREET, COLUMBIA','555-7777','2024-04-04');
+INSERT INTO Member VALUES 
+(8,'LIZ','MOODY','2000-07-03','54 LAUREL STREET, COLUMBIA','777-8888','2022-02-02');
+INSERT INTO Member VALUES 
+(9,'HUNTER','CORZINE','2001-11-01','18 RICHLAND STREET, COLUMBIA','888-9999','2025-12-01');
+INSERT INTO Member VALUES 
+(10,'STEPHEN','VICKERY','1999-06-12','543 JACKSON STREET, COLUMBIA','999-1111','2020-12-13');
+SELECT * FROM Member \G;
+
+INSERT INTO Volunteer VALUES (1, 1, 'KALLIE', 'SNIPES', 'Weekends');
+INSERT INTO Volunteer VALUES (2, 2, 'ROBERT', 'CAREY', 'Weekdays');
+INSERT INTO Volunteer VALUES (3, 3, 'ASHLEY', 'MERIDA', 'Evenings');
+INSERT INTO Volunteer VALUES (4, 4, 'NATALIE', 'CAREY', 'Weekends');
+INSERT INTO Volunteer VALUES (5, 5, 'KYLIE', 'STACEY', 'Mornings');
+INSERT INTO Volunteer VALUES (6, 6, 'CLAYTON', 'STACEY', 'Evenings');
+INSERT INTO Volunteer VALUES (7, 7, 'MIKAYLA', 'MOORE', 'Weekdays');
+INSERT INTO Volunteer VALUES (8, 8, 'LIZ', 'MOODY', 'Weekends');
+INSERT INTO Volunteer VALUES (9, 9, 'HUNTER', 'CORZINE', 'Mornings');
+INSERT INTO Volunteer VALUES (10, 10, 'STEPHEN', 'VICKERY', 'Weekdays');
+SELECT * FROM Volunteer \G;
+
+INSERT INTO Event VALUES (1, 'Feed the Hungry', '2025-06-01', '11:00:00', 'Church Hall', 'Serve meals to those in need', 1);
+INSERT INTO Event VALUES (2, 'Christmas Pageant', '2025-12-15', '17:00:00', 'Church Sanctuary', 'Annual Christmas play performed by members', 2);
+INSERT INTO Event VALUES (3, 'Fourth of July Celebration', '2025-07-04', '12:00:00', 'Church Grounds', 'Community celebration with games and food', 3);
+INSERT INTO Event VALUES (4, 'Easter Egg Hunt', '2025-04-05', '10:00:00', 'Church Yard', 'Egg hunt event for children', 4);
+INSERT INTO Event VALUES (5, 'Youth Group Meeting', '2025-06-10', '18:00:00', 'Youth Room', 'Weekly meeting for church youth activities', 5);
+INSERT INTO Event VALUES (6, 'Bible Study Session', '2025-06-12', '19:00:00', 'Meeting Hall', 'Evening Bible study for adults', 6);
+INSERT INTO Event VALUES (7, 'Community Outreach', '2025-06-20', '09:00:00', 'Local Neighborhood', 'Visit and support local community members', 7);
+INSERT INTO Event VALUES (8, 'Choir Practice', '2025-06-22', '17:30:00', 'Church Music Room', 'Weekly choir rehearsal for upcoming services', 8);
+INSERT INTO Event VALUES (9, 'Church Cleanup Day', '2025-07-01', '08:00:00', 'Church Grounds', 'Volunteer to clean and maintain church property', 9);
+INSERT INTO Event VALUES (10, 'Fundraising Dinner', '2025-07-10', '18:30:00', 'Fellowship Hall', 'Dinner event to raise funds for church activities', 10);
+SELECT * FROM Event \G;
+
+INSERT INTO Donations VALUES (1, 1, '2025-01-10', 'Cash', 100.00);
+INSERT INTO Donations VALUES (2, 2, '2025-02-15', 'Check', 250.00);
+INSERT INTO Donations VALUES (3, 3, '2025-03-04', 'Online', 35.50);
+INSERT INTO Donations VALUES (4, 4, '2025-04-12', 'Cash', 500.00);
+INSERT INTO Donations VALUES (5, 5, '2025-05-20', 'Check', 20.00);
+INSERT INTO Donations VALUES (6, 6, '2025-06-02', 'Online', 150.00);
+INSERT INTO Donations VALUES (7, 7, '2025-06-18', 'Cash', 60.00);
+INSERT INTO Donations VALUES (8, 8, '2025-07-01', 'Check', 80.00);
+INSERT INTO Donations VALUES (9, 9, '2025-07-12', 'Online', 120.00);
+INSERT INTO Donations VALUES (10, 10, '2025-07-20', 'Cash', 300.00);
+INSERT INTO Donations VALUES (11, 1, '2025-08-05', 'Online', 150.00);
+INSERT INTO Donations VALUES (12, 2, '2025-08-15', 'Cash', 75.00);
+INSERT INTO Donations VALUES (13, 2, '2025-09-01', 'Check', 130.00);
+SELECT * FROM Donations \G;
+
+UPDATE Member
+SET Address = '200 GRAND STREET, COLUMBIA'
+WHERE MemberID = 4;
+SELECT * FROM Member WHERE MemberID = 4 \G;
+
+ALTER TABLE Member
+ADD Email VARCHAR(35);
+SELECT * FROM Member \G;
+
+SELECT 
+    d.DonationID,
+    d.Date,
+    d.Type,
+    d.Amount,
+    m.MemberID,
+    CONCAT(m.FirstName, ' ', m.LastName) AS MemberName
+FROM Donations d
+INNER JOIN Member m ON d.MemberID = m.MemberID
+ORDER BY d.DonationID;
+
+SELECT 
+    e.EventID,
+    e.Name AS EventName,
+    e.Date,
+    e.Location,
+    v.VolunteerID,
+    CONCAT(v.FirstName, ' ', v.LastName) AS VolunteerName
+FROM Event e
+LEFT JOIN Volunteer v ON e.VolunteerID = v.VolunteerID
+ORDER BY e.EventID;
+
+SELECT 
+    MemberID, 
+    CONCAT(FirstName, ' ', LastName) AS MemberName
+FROM Member
+WHERE MemberID IN (
+    SELECT MemberID 
+    FROM Donations
+    GROUP BY MemberID
+    HAVING SUM(Amount) > (SELECT AVG(Amount) FROM Donations)
+)
+ORDER BY MemberID;
+
+SELECT 
+    EventID,
+    Name AS EventName,
+    Date,
+    Location
+FROM Event
+WHERE Date IN (
+    SELECT Date 
+    FROM Event 
+    WHERE YEAR(Date) = 2025
+)
+ORDER BY EventID;
+
+SELECT 
+    m.MemberID,
+    CONCAT(m.FirstName, ' ', m.LastName) AS MemberName,
+    SUM(d.Amount) AS TotalDonated
+FROM Member m
+LEFT JOIN Donations d ON m.MemberID = d.MemberID
+GROUP BY m.MemberID, m.FirstName, m.LastName
+ORDER BY TotalDonated DESC;
+
+SELECT 
+    COUNT(*) AS DonationCount,
+    AVG(Amount) AS AverageDonation,
+    SUM(Amount) AS TotalDonations
+FROM Donations;
+
+SELECT 
+    MemberID,
+    UPPER(CONCAT(FirstName, ' ', LastName)) AS NameUpper,
+    ROUND(DATEDIFF(CURRENT_DATE, DateJoined) / 365, 1) AS YearsSinceJoined
+FROM Member
+ORDER BY MemberID;
+
+SELECT 
+    m.MemberID,
+    CONCAT(m.FirstName, ' ', m.LastName) AS MemberName,
+    COUNT(d.DonationID) AS NumberOfDonations
+FROM Member m
+JOIN Donations d ON m.MemberID = d.MemberID
+GROUP BY m.MemberID, m.FirstName, m.LastName
+ORDER BY NumberOfDonations DESC;
